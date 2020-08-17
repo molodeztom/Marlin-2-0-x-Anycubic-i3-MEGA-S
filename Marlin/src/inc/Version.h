@@ -33,7 +33,7 @@
  * vendor name, download location, GitHub account, etc.
  */
 #ifndef DETAILED_BUILD_VERSION
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (Tom2208, Github)"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (Tom2208 V1, Github)"
 #endif
 
 /**
@@ -77,7 +77,7 @@
  * Define a generic printer name to be output to the LCD after booting Marlin.
  */
 #ifndef MACHINE_NAME
-  #define MACHINE_NAME "Knutwurst's Anycubic i3 MEGA"
+  #define MACHINE_NAME "Tom's Anycubic i3 MEGA S"
 #endif
 
 /**
@@ -86,7 +86,7 @@
  * providing the source code to your customers.)
  */
 #ifndef SOURCE_CODE_URL
-  #define SOURCE_CODE_URL "https://github.com/knutwurst/Marlin-2-0-x-Anycubic-i3-MEGA-S"
+  #define SOURCE_CODE_URL "https://github.com/molodeztom/Marlin-2-0-x-Anycubic-i3-MEGA-S.git"
 #endif
 
 /**

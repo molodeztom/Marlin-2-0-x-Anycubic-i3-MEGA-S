@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * 12.08.20 TFR: Change Temp Sensor from 5 to 11 Thermistor: 100K NTC B 3950 ± 1%
+ * 17.08.20 TFR: Merged with knutwurst V1.1.3 PID Tunikg, Z UP/DOWN 0.01mm
  */
 #pragma once
 
@@ -580,7 +581,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 295
+#define HEATER_0_MAXTEMP 285
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -908,7 +909,7 @@
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_S)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 392 }
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 394 }
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_X)
