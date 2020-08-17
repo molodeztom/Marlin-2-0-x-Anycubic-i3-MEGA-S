@@ -447,13 +447,21 @@ void AnycubicTouchscreenClass::HandleSpecialMenu()
   || (strcasestr(currentTouchscreenSelection, SM_PID_HOTEND_S) != NULL))
   {
     SERIAL_ECHOLNPGM("Special Menu: PID Tune Hotend");
-    queue.inject_P(PSTR("M106 S204\nM303 E0 S210 C15 U1"));
+    queue.inject_P(PSTR("G28\nG90\nG1 Z20\nG1 X100 Y100 F4000\nG1 Z5\nM106 S172\nG4 P500\nM303 E0 S215 C15 U1\nG4 P500\nM107\nG28\nG1 Z10\nM84"));
+    buzzer.tone(200, 1108);
+    buzzer.tone(200, 1661);
+    buzzer.tone(200, 1108);
+    buzzer.tone(600, 1661);
   }
   else if ((strcasestr(currentTouchscreenSelection, SM_PID_BED_L) != NULL)
   || (strcasestr(currentTouchscreenSelection, SM_PID_BED_S) != NULL))
   {
     SERIAL_ECHOLNPGM("Special Menu: PID Tune Ultrabase");
     queue.inject_P(PSTR("M303 E-1 S60 C6 U1"));
+    buzzer.tone(200, 1108);
+    buzzer.tone(200, 1661);
+    buzzer.tone(200, 1108);
+    buzzer.tone(600, 1661);
   }
   else if ((strcasestr(currentTouchscreenSelection, SM_SAVE_EEPROM_L) != NULL)
   || (strcasestr(currentTouchscreenSelection, SM_SAVE_EEPROM_S) != NULL))
@@ -519,17 +527,15 @@ void AnycubicTouchscreenClass::HandleSpecialMenu()
   || (strcasestr(currentTouchscreenSelection, SM_Z_UP_001_S) != NULL))
   {
     SERIAL_ECHOLNPGM("Special Menu: Z Up 0.01");
-    queue.inject_P(PSTR("G91\nG1 Z+0.01\nG90"));
     //queue.inject_P(PSTR("G91\nG1 Z+0.01\nG90"));
-    //queue.inject_P(PSTR("G91\nG1 Z-0.02\nG90"));
+    queue.inject_P(PSTR("G91\nG1 Z+0.03\nG4 P250\nG1 Z-0.02\nG90"));
   }
   else if ((strcasestr(currentTouchscreenSelection, SM_Z_DN_001_L) != NULL)
-  || (strcasestr(currentTouchscreenSelection, SM_Z_DN_001_L) != NULL))
+  || (strcasestr(currentTouchscreenSelection, SM_Z_DN_001_S) != NULL))
   {
     SERIAL_ECHOLNPGM("Special Menu: Z Down 0.01");
-    queue.inject_P(PSTR("G91\nG1 Z-0.01\nG90"));
-    //queue.inject_P(PSTR("G91\nG1 Z+0.02\nG90"));
-    //queue.inject_P(PSTR("G91\nG1 Z-0.03\nG90"));
+    //queue.inject_P(PSTR("G91\nG1 Z-0.01\nG90"));
+    queue.inject_P(PSTR("G91\nG1 Z+0.02\nG4 P250\nG1 Z-0.03\nG90"));
   }
 #endif
 
@@ -538,7 +544,7 @@ void AnycubicTouchscreenClass::HandleSpecialMenu()
   || (strcasestr(currentTouchscreenSelection, SM_BLTOUCH_S) != NULL))
   {
     SERIAL_ECHOLNPGM("Special Menu: BLTouch Leveling");
-    queue.inject_P(PSTR("G28\nG29"));
+    queue.inject_P(PSTR("G28\nG29\nM500\nG90\nG1 Z30 F4000\nG1 X0 F4000\nG91\nM84"));
   }
 #endif
 
@@ -1077,6 +1083,8 @@ void AnycubicTouchscreenClass::GetCommandFromTFT()
     
           if( (int)(strtod(&TFTcmdbuffer[TFTbufindw][TFTstrchr_pointer - TFTcmdbuffer[TFTbufindw] + 1], NULL)) != checksum)
           {
+              HARDWARE_SERIAL_ERROR_START;
+              HardwareSerial.flush();
               HARDWARE_SERIAL_ERROR_START;
               HardwareSerial.flush();
               serial3_count = 0;

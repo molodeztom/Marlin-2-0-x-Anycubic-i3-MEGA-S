@@ -40,11 +40,13 @@
  * The STRING_DISTRIBUTION_DATE represents when the binary file was built,
  * here we define this default string as the date where the latest release
  * version was tagged.
+ * From Knutwurst Build Version 1.1.3 16.08.20
  */
- #define CUSTOM_BUILD_VERSION "1.1.1"
+ #define CUSTOM_BUILD_VERSION "1.1.3"
 
 #ifndef STRING_DISTRIBUTION_DATE
-  #define STRING_DISTRIBUTION_DATE "2020-08-12"
+  //#define STRING_DISTRIBUTION_DATE "2020-07-09"
+  #define STRING_DISTRIBUTION_DATE "2020-08-16"
 #endif
 
 /**

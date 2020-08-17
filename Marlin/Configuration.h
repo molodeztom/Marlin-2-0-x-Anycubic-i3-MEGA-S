@@ -44,6 +44,26 @@
 //#define ANYCUBIC_TFT_DEBUG
 //#define POWER_OUTAGE_TEST
 
+/*******************************************************************************************
+ **                                                                                       **
+ **                                                                                       **
+ **   WARNING:                                                                            **
+ **   THE FOLLOWING SETTINGS ARE NORMALLY SET BY PLATFORMIO!                              **
+ **                                                                                       **
+ **   IF YOU CHANGE THEM WITHIN THE SOURCECODE, DO NOT COMMIT                             **
+ **   TO MASTER BRANCH OR BUILD WITH PLATFORMIO ENVIRONMENT!                              **
+ **   OTHERWISE SOME SETTINGS MIGHT BE OVERWRITTEN AND YOU END                            **
+ **   UP WITH A NON FUNCTIONING FIRMWARE!                                                 **
+ **                                                                                       **
+ **   If you want to select a specific configuration for your                             **
+ **   printer, just open the PlatformIO tab on the left, select                           **
+ **   PROJECT TASKS and then "env:i3_MEGA*" (your desired config)                         **
+ **   From there you can build and upload your code.                                      **
+ **                                                                                       **
+ **                                                                                       **
+ *******************************************************************************************/
+ 
+
 /*
  * Select your printer.
  * DO NOT ENABLE MORE THAN ONE LINE!
@@ -51,6 +71,9 @@
  * MEGA is the normal i3 Version without spool holder and the cassic extruder
  * MEGA_S is the S version with Titan clone extruder
  * MEGA_X is the big version with 310x310mm Bed
+ * 
+ * PLEASE READ THE WARNING ABOVE!
+ * 
  */
 //#define KNUTWURST_MEGA
 #define KNUTWURST_MEGA_S
@@ -61,6 +84,9 @@
  * you have the "new" Mega S with the blue/yellow
  * Touchscreen display, you need to enable the
  * DGUS2 switch to get the special menu to work
+ * 
+ * PLEASE READ THE WARNING ABOVE!
+ * 
  */
 //#define KNUTWURST_DGUS2_TFT
 
@@ -68,19 +94,10 @@
  * Enable Support for Trinamic Stepper drivers.
  * This also inverts the X,Y,Z and Extruder motor
  * outputs/directions.
+ * 
+ * PLEASE READ THE WARNING ABOVE!
  */
 #define KNUTWURST_TMC
-
-
-/*
- * Here you can set the default preheat-Temperatures
- * which are set when you use the builtin preheat
- * functions in the TFT.
- */
-#define KNUTWURST_PRHEAT_NOZZLE_PLA 200
-#define KNUTWURST_PRHEAT_BED_PLA     60
-#define KNUTWURST_PRHEAT_NOZZLE_ABS 240
-#define KNUTWURST_PRHEAT_BED_ABS     90
 
 /*
  * This enables the BLTouch Support and also 
@@ -88,6 +105,9 @@
  * special menu. It also removes all manual 
  * leveling features because they are not 
  * neccessary at all.
+ * 
+ * PLEASE READ THE WARNING ABOVE!
+ * 
  */
 //#define KNUTWURST_BLTOUCH // see <https://github.com/DerDominik/Marlin-AnycubicI3Mega-BLTouch/wiki/Aufbauplan_BLTouch>
 
@@ -96,8 +116,44 @@
  * It enabled more console output and should be
  * disabled in production. It can cause the
  * printer to stutter.
+ * 
+ * PLEASE READ THE WARNING ABOVE!
+ * 
  */
 //#define KNUTWURST_DEBUG
+
+
+/*******************************************************************************************
+ **                                                                                       **
+ **                                                                                       **
+ **   WARNING:                                                                            **
+ **   THE SETTINGS ABOVE ARE NORMALLY SET BY PLATFORMIO!                                  **
+ **                                                                                       **
+ **   IF YOU CHANGE THEM WITHIN THE SOURCECODE, DO NOT COMMIT                             **
+ **   TO MASTER BRANCH OR BUILD WITH PLATFORMIO ENVIRONMENT!                              **
+ **   OTHERWISE SOME SETTINGS MIGHT BE OVERWRITTEN AND YOU END                            **
+ **   UP WITH A NON FUNCTIONING FIRMWARE!                                                 **
+ **                                                                                       **
+ **   If you want to select a specific configuration for your                             **
+ **   printer, just open the PlatformIO tab on the left, select                           **
+ **   PROJECT TASKS and then "env:i3_MEGA*" (your desired config)                         **
+ **   From there you can build and upload your code.                                      **
+ **                                                                                       **
+ **                                                                                       **
+ *******************************************************************************************/
+
+
+/*
+ * Here you can set the default preheat-Temperatures
+ * which are set when you use the builtin preheat
+ * functions in the TFT.
+ * 
+ * These settings are required and not set by PlatformIO.
+ */
+#define KNUTWURST_PRHEAT_NOZZLE_PLA 200
+#define KNUTWURST_PRHEAT_BED_PLA     60
+#define KNUTWURST_PRHEAT_NOZZLE_ABS 240
+#define KNUTWURST_PRHEAT_BED_ABS     90
 
 
 //===========================================================================
@@ -202,7 +258,7 @@
  * on the upper left of the PCB silkscreen.
  */
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_TRIGORILLA_14
+  //#define MOTHERBOARD BOARD_TRIGORILLA_14  // Is normally set by PlatformIO
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
@@ -865,11 +921,11 @@
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
 #if ENABLED(KNUTWURST_MEGA)
-    #define DEFAULT_MAX_FEEDRATE          { 500, 500, 6, 60 }
+    #define DEFAULT_MAX_FEEDRATE          { 500, 500, 8, 60 }
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_S)
-    #define DEFAULT_MAX_FEEDRATE          { 500, 500, 6, 30 }
+    #define DEFAULT_MAX_FEEDRATE          { 500, 500, 8, 30 }
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_X)
@@ -889,7 +945,16 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 2000,  60, 10000 }
+#if EITHER(KNUTWURST_MEGA, KNUTWURST_MEGA_S)
+    #define DEFAULT_MAX_ACCELERATION      { 3000, 2000,  60, 10000 }
+#endif
+
+#if ENABLED(KNUTWURST_MEGA_X)
+    #define DEFAULT_MAX_ACCELERATION      { 400, 400, 60, 10000 }
+#endif
+
+
+
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -932,10 +997,31 @@
  * value set here, it may happen instantaneously.
  */
 //#define CLASSIC_JERK
+
+// I Know.. it's useless to put it here ;)
+#if EITHER(KNUTWURST_MEGA, KNUTWURST_MEGA_S)
+    //#define CLASSIC_JERK
+#endif
+
+#if ENABLED(KNUTWURST_MEGA_X)
+    #define CLASSIC_JERK
+#endif
+
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK  10.0
-  #define DEFAULT_YJERK  10.0
-  #define DEFAULT_ZJERK  0.4
+
+#if EITHER(KNUTWURST_MEGA, KNUTWURST_MEGA_S)
+    #define DEFAULT_XJERK  10.0
+    #define DEFAULT_YJERK  10.0
+    #define DEFAULT_ZJERK  0.4
+#endif
+
+#if ENABLED(KNUTWURST_MEGA_X)
+    #define DEFAULT_XJERK  4.0
+    #define DEFAULT_YJERK  4.0
+    #define DEFAULT_ZJERK  0.15
+#endif
+
+
 
   //#define TRAVEL_EXTRA_XYJERK 0.0     // Additional jerk allowance for all travel moves
 
@@ -945,7 +1031,13 @@
   #endif
 #endif
 
-#define DEFAULT_EJERK    5.0  // May be used by Linear Advance
+#if EITHER(KNUTWURST_MEGA, KNUTWURST_MEGA_S)
+    #define DEFAULT_EJERK    5.0  // May be used by Linear Advance
+#endif
+
+#if ENABLED(KNUTWURST_MEGA_X)
+    #define DEFAULT_EJERK    8.0  // May be used by Linear Advance
+#endif
 
 /**
  * Junction Deviation Factor
@@ -955,7 +1047,13 @@
  *   http://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+    #if EITHER(KNUTWURST_MEGA, KNUTWURST_MEGA_S)
+        #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+    #endif
+
+    #if ENABLED(KNUTWURST_MEGA_X)
+        #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+    #endif
 #endif
 
 /**
@@ -1128,10 +1226,10 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define MIN_PROBE_EDGE 10
+#define MIN_PROBE_EDGE 30
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 3600
+#define XY_PROBE_SPEED 8000
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
@@ -1584,7 +1682,7 @@
 
 // Homing speeds (mm/m)
 #define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (4*60)
+#define HOMING_FEEDRATE_Z  (5*60)
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
