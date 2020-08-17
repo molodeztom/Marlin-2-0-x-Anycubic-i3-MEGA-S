@@ -1,12 +1,6 @@
-# Knutwurst's i3 MEGA (S/X) Firmware (based on Marlin 2.0.5.4)
-
-<span style="color: red;">(BITTE GENAU DURCHLESEN! / PLEASE READ CAREFULLY!)</span>
-
-### Wenn dir gefällt, was ich mache, kannst du mir hier einen Kaffee spendieren*: [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/oliverkoester)
-<sub>*Es muss jetzt keine großzügige Spende sein. Ein paar Cent reichen um mir zu zeigen, wer überhaupt Interesse daran hat und wem die Weiterentwicklung wichtig ist. So bleibt die Motivation da und ich weiß einfach, dass ich nicht für die Tonne programmiere ;)<sub>
+# Dies ist ein Fork von Knutwurst's i3 MEGA (S/X) Firmware (based on Marlin 2.0.5.4)
 
 
-### Wenn du Fragen hast, schaue gern in der offiziellen [Facebook-Gruppe](https://www.facebook.com/groups/3094090037303577/) vorbei.
 
 
 # Inhaltsverzeichnis (Deutsch)
