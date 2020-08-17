@@ -18,6 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * 12.08.20 TFR: Change Temp Sensor from 5 to 11 Thermistor: 100K NTC B 3950 ± 1%
  */
 #pragma once
 
@@ -52,7 +53,7 @@
  * MEGA_X is the big version with 310x310mm Bed
  */
 //#define KNUTWURST_MEGA
-//#define KNUTWURST_MEGA_S
+#define KNUTWURST_MEGA_S
 //#define KNUTWURST_MEGA_X
 
 /*
@@ -68,7 +69,7 @@
  * This also inverts the X,Y,Z and Extruder motor
  * outputs/directions.
  */
-//#define KNUTWURST_TMC
+#define KNUTWURST_TMC
 
 
 /*
@@ -132,7 +133,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(knutwurst)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Tom)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -479,7 +480,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 5
+#define TEMP_SENSOR_0 11
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -557,9 +558,14 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // i3 Mega stock v5 hotend, 40W heater cartridge (3.6Ω @ 22°C)
-  #define  DEFAULT_Kp 15.94
-  #define  DEFAULT_Ki 1.17
-  #define  DEFAULT_Kd 54.19
+  //#define  DEFAULT_Kp 15.94
+  //#define  DEFAULT_Ki 1.17
+  //#define  DEFAULT_Kd 54.19
+
+   // Toms PID Settings
+  #define  DEFAULT_Kp 12.76
+  #define  DEFAULT_Ki 0.85
+  #define  DEFAULT_Kd 47.84
 
   // Ultimaker
   // #define DEFAULT_Kp 22.2
