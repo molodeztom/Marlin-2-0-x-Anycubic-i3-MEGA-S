@@ -33,7 +33,7 @@
  * vendor name, download location, GitHub account, etc.
  */
 #ifndef DETAILED_BUILD_VERSION
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (Tom2208 V1, Github)"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (Tom23.08 V1.1, BLTouch)"
 #endif
 
 /**
@@ -46,7 +46,7 @@
 
 #ifndef STRING_DISTRIBUTION_DATE
   //#define STRING_DISTRIBUTION_DATE "2020-07-09"
-  #define STRING_DISTRIBUTION_DATE "2020-08-16"
+  #define STRING_DISTRIBUTION_DATE "2020-08-23"
 #endif
 
 /**

@@ -20,6 +20,7 @@
  *
  * 12.08.20 TFR: Change Temp Sensor from 5 to 11 Thermistor: 100K NTC B 3950 ± 1%
  * 17.08.20 TFR: Merged with knutwurst V1.1.3 PID Tunikg, Z UP/DOWN 0.01mm
+ * 23.08.20 TFR: BLTouch installed Compile i3_MEGA_S_TMC_BLTOUCH_11
  */
 #pragma once
 
@@ -1217,8 +1218,8 @@
  * Specify a Probe position as { X, Y, Z }
  */
 #if ENABLED(KNUTWURST_BLTOUCH)
-#define NOZZLE_TO_PROBE_OFFSET { -2, -25, 0 } //https://www.thingiverse.com/thing:2824005
-//#define NOZZLE_TO_PROBE_OFFSET { 29, -15, 0 } //X-Carriage
+//#define NOZZLE_TO_PROBE_OFFSET { -2, -25, 0 } //https://www.thingiverse.com/thing:2824005
+#define NOZZLE_TO_PROBE_OFFSET { 29, -15, 0 } //X-Carriage
 #endif
 
 #if DISABLED(KNUTWURST_BLTOUCH)
