@@ -447,7 +447,7 @@ void AnycubicTouchscreenClass::HandleSpecialMenu()
   || (strcasestr(currentTouchscreenSelection, SM_PID_HOTEND_S) != NULL))
   {
     SERIAL_ECHOLNPGM("Special Menu: PID Tune Hotend");
-    queue.inject_P(PSTR("G28\nG90\nG1 Z20\nG1 X100 Y100 F4000\nG1 Z5\nM106 S172\nG4 P500\nM303 E0 S215 C15 U1\nG4 P500\nM107\nG28\nG1 Z10\nM84"));
+    queue.inject_P(PSTR("G28\nG90\nG1 Z20\nG1 X110 Y110 F4000\nG1 Z5\nM106 S172\nG4 P500\nM303 E0 S215 C15 U1\nG4 P500\nM107\nG28\nG1 Z10\nM84"));
     buzzer.tone(200, 1108);
     buzzer.tone(200, 1661);
     buzzer.tone(200, 1108);
@@ -731,8 +731,8 @@ void AnycubicTouchscreenClass::PrintList()
         
         // Cut off too long filenames.
         // They don't fit on the screen anyways.
-        if(fileNameLen > MAX_PRINTABLE_FILENAME_LEN)
-          fileNameLen = MAX_PRINTABLE_FILENAME_LEN;
+        //if(fileNameLen > MAX_PRINTABLE_FILENAME_LEN)
+        //  fileNameLen = MAX_PRINTABLE_FILENAME_LEN;
         
         char outputString[fileNameLen];
 
@@ -790,7 +790,8 @@ void AnycubicTouchscreenClass::PrintList()
 #endif
   else
   {
-    // Do nothing?
+    HARDWARE_SERIAL_PROTOCOLLNPGM(SM_SPECIAL_MENU_S);
+    HARDWARE_SERIAL_PROTOCOLLNPGM(SM_SPECIAL_MENU_L);
   }
 }
 
@@ -1180,7 +1181,7 @@ void AnycubicTouchscreenClass::GetCommandFromTFT()
             }
             else
             {
-              HARDWARE_SERIAL_PROTOCOLPGM("J02");
+              HARDWARE_SERIAL_PROTOCOLPGM("J02");  // J02 SD Card initilized
             }
           }
           else
@@ -1216,20 +1217,19 @@ void AnycubicTouchscreenClass::GetCommandFromTFT()
           currentTouchscreenSelection[0] = 0;
           if (!IS_SD_INSERTED())
           {
-            HARDWARE_SERIAL_PROTOCOLPGM("J02");
+            HARDWARE_SERIAL_PROTOCOLPGM("J02");  // J02 SD Card initilized
             HARDWARE_SERIAL_ENTER();
           }
-          else
-          {
-            if (CodeSeen('S'))
-              filenumber = CodeValue();
-              
-            HARDWARE_SERIAL_PROTOCOLPGM("FN "); // Filelist start
-            HARDWARE_SERIAL_ENTER();
-            PrintList();
-            HARDWARE_SERIAL_PROTOCOLPGM("END"); // Filelist stop
-            HARDWARE_SERIAL_ENTER();
-          }
+          
+          if (CodeSeen('S'))
+            filenumber = CodeValue();
+            
+          HARDWARE_SERIAL_PROTOCOLPGM("FN "); // Filelist start
+          HARDWARE_SERIAL_ENTER();
+          PrintList();
+          HARDWARE_SERIAL_PROTOCOLPGM("END"); // Filelist stop
+          HARDWARE_SERIAL_ENTER();
+          
 #endif
           break;
         case 9: // A9 pause sd print
@@ -1646,6 +1646,7 @@ void AnycubicTouchscreenClass::GetCommandFromTFT()
         case 33: // A33 get version info
         {
           HARDWARE_SERIAL_PROTOCOLPGM("J33 ");
+          HARDWARE_SERIAL_PROTOCOLPGM("Knutwurst-");
           HARDWARE_SERIAL_PROTOCOLPGM(MSG_MY_VERSION);
           HARDWARE_SERIAL_ENTER();
         }

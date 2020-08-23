@@ -42,7 +42,7 @@
  * version was tagged.
  * From Knutwurst Build Version 1.1.3 16.08.20
  */
- #define CUSTOM_BUILD_VERSION "1.1.3"
+ #define CUSTOM_BUILD_VERSION "1.1.4-beta"
 
 #ifndef STRING_DISTRIBUTION_DATE
   //#define STRING_DISTRIBUTION_DATE "2020-07-09"
