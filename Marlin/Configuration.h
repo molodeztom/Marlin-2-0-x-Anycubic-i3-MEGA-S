@@ -20,7 +20,7 @@
  *
  * 12.08.20 TFR: Change Temp Sensor from 5 to 11 Thermistor: 100K NTC B 3950 ± 1%
  * 17.08.20 TFR: Merged with knutwurst V1.1.3 PID Tunikg, Z UP/DOWN 0.01mm
- * 23.08.20 TFR: BLTouch installed Compile i3_MEGA_S_TMC_BLTOUCH_11
+ * 23.08.20 TFR: BLTouch installed Compile I3_M_S_T_B_11
  */
 #pragma once
 
@@ -1392,7 +1392,7 @@
 // The size of the print bed
 #if EITHER(KNUTWURST_MEGA, KNUTWURST_MEGA_S)
     #define X_BED_SIZE 225
-    #define Y_BED_SIZE 220
+    #define Y_BED_SIZE 215
     #define Z_BED_HEIGHT 210
 #endif
 
