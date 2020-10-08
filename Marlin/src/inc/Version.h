@@ -33,7 +33,7 @@
  * vendor name, download location, GitHub account, etc.
  */
 #ifndef DETAILED_BUILD_VERSION
-  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (Tom23.08 V1.1, BLTouch)"
+  #define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " (Tom27.09 V1.4, V6 BLT BMG)"
 #endif
 
 /**

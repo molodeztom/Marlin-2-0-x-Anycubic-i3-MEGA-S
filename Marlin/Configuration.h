@@ -21,6 +21,7 @@
  * 12.08.20 TFR: Change Temp Sensor from 5 to 11 Thermistor: 100K NTC B 3950 ± 1%
  * 17.08.20 TFR: Merged with knutwurst V1.1.3 PID Tunikg, Z UP/DOWN 0.01mm
  * 23.08.20 TFR: BLTouch installed Compile I3_M_S_T_B_11
+ * 27.09.20 TFR: V1.3 V6 Hotend: neuer Tempsensor from 11 to 13 100 Hisens 3950
  */
 #pragma once
 
@@ -538,7 +539,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 11
+#define TEMP_SENSOR_0 13
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -620,10 +621,10 @@
   //#define  DEFAULT_Ki 1.17
   //#define  DEFAULT_Kd 54.19
 
-   // Toms PID Settings
-  #define  DEFAULT_Kp 12.76
-  #define  DEFAULT_Ki 0.85
-  #define  DEFAULT_Kd 47.84
+   // Toms PID Settings V6 Hotend Silikonsocke Lüfter 70 % 
+   #define DEFAULT_Kp 17.03
+  #define DEFAULT_Ki 1.42
+  #define DEFAULT_Kd 50.92
 
   // Ultimaker
   // #define DEFAULT_Kp 22.2
@@ -910,7 +911,7 @@
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_S)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 394 }
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 392 }
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_X)
@@ -1219,7 +1220,7 @@
  */
 #if ENABLED(KNUTWURST_BLTOUCH)
 //#define NOZZLE_TO_PROBE_OFFSET { -2, -25, 0 } //https://www.thingiverse.com/thing:2824005
-#define NOZZLE_TO_PROBE_OFFSET { 29, -15, 0 } //X-Carriage
+#define NOZZLE_TO_PROBE_OFFSET { 29, -15, -0.2 } //X-Carriage
 #endif
 
 #if DISABLED(KNUTWURST_BLTOUCH)
@@ -1389,9 +1390,9 @@
 
 // @section machine
 
-// The size of the print bed
+// The size of the print bed Changed X-Bed Size 225 to 215 
 #if EITHER(KNUTWURST_MEGA, KNUTWURST_MEGA_S)
-    #define X_BED_SIZE 225
+    #define X_BED_SIZE 215
     #define Y_BED_SIZE 215
     #define Z_BED_HEIGHT 210
 #endif
@@ -1560,7 +1561,7 @@
     #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for the G26 Mesh Validation Tool.
     #define MESH_TEST_HOTEND_TEMP  200    // (°C) Default nozzle temperature for the G26 Mesh Validation Tool.
-    #define MESH_TEST_BED_TEMP      60    // (°C) Default bed temperature for the G26 Mesh Validation Tool.
+    #define MESH_TEST_BED_TEMP      65    // (°C) Default bed temperature for the G26 Mesh Validation Tool.
     #define G26_XY_FEEDRATE         20    // (mm/s) Feedrate for XY Moves for the G26 Mesh Validation Tool.
     #define G26_RETRACT_MULTIPLIER   1.0  // G26 Q (retraction) used by default between mesh test elements.
   #endif

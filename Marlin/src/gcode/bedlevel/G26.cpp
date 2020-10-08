@@ -43,7 +43,7 @@
 #include "../../lcd/ultralcd.h"
 
 #define EXTRUSION_MULTIPLIER 1.0
-#define RETRACTION_LENGTH 1
+#define RETRACTION_LENGTH 5
 #define UNRETRACTION_LENGTH 1.2
 #define PRIME_LENGTH 5
 #define OOZE_AMOUNT 2.25
