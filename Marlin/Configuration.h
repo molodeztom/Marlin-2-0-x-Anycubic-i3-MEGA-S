@@ -911,7 +911,7 @@
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_S)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 392 }
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 413 }
 #endif
 
 #if ENABLED(KNUTWURST_MEGA_X)
@@ -1220,7 +1220,7 @@
  */
 #if ENABLED(KNUTWURST_BLTOUCH)
 //#define NOZZLE_TO_PROBE_OFFSET { -2, -25, 0 } //https://www.thingiverse.com/thing:2824005
-#define NOZZLE_TO_PROBE_OFFSET { 29, -15, -0.2 } //X-Carriage
+#define NOZZLE_TO_PROBE_OFFSET { 29, -15, -2.1 } //X-Carriage
 #endif
 
 #if DISABLED(KNUTWURST_BLTOUCH)
